@@ -61,8 +61,7 @@ public class TemperatureConverter extends javax.swing.JFrame {
                     throw new AssertionError();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
             jlError.setText("Debe indicar un valor numérico");
         }
         return stTempOutput;
@@ -145,7 +144,6 @@ public class TemperatureConverter extends javax.swing.JFrame {
     //accion al cambiar el valor de la seleccion
     private void changeItem(java.awt.event.ItemEvent evt) {
         // código del evento al pulsar el Boton
-        System.out.println("Ha cambiado el valor del Item: " + jcbUnit.getSelectedItem());
         String selection = (String) jcbUnit.getSelectedItem();
 
         switch (selection) {
