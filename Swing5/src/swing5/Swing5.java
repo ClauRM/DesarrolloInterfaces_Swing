@@ -63,6 +63,7 @@ public class Swing5 extends javax.swing.JFrame {
         pack();
     }
 
+    
     private void pulsarBoton(java.awt.event.ActionEvent evt) {
         // código del evento al pulsar el Boton
         System.out.print("Has pulsado el botón");
