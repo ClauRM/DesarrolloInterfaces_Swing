@@ -23,6 +23,11 @@ public class TemperatureConverter extends javax.swing.JFrame {
                     flTempOutput = (flTempInput * 9 / 5) + 32;
                     stTempOutput = Float.toString(flTempOutput);
                     jlFahrenheit.setText(stTempOutput + " ºF");
+                    //convertir ºC a K (0 °C + 273,15)
+                    flTempOutput = (flTempInput + 273.15f);
+                    stTempOutput = Float.toString(flTempOutput);
+                    jlKelvin.setText(stTempOutput + " K");
+                    //temperatura en ºC
                     jlCelsius.setText(stTempInput + " ºC");
                     jlError.setText("");
                     break;
@@ -30,8 +35,26 @@ public class TemperatureConverter extends javax.swing.JFrame {
                     //convertir ºF a ºC (0 °F − 32) × 5 / 9
                     flTempOutput = (flTempInput - 32) * 5 / 9;
                     stTempOutput = Float.toString(flTempOutput);
-                    jlCelsius.setText(stTempOutput + " ºF");
+                    jlCelsius.setText(stTempOutput + " ºC");
+                    //convertir de ºF a K (0 °F − 32) × 5 / 9 + 273,15
+                    flTempOutput = (flTempInput - 32) * 5 / 9 + 273.15f;
+                    stTempOutput = Float.toString(flTempOutput);
+                    jlKelvin.setText(stTempOutput + " K");
+                    //temperatura en ºF
                     jlFahrenheit.setText(stTempInput + " ºF");
+                    jlError.setText("");
+                    break;
+                case "K":
+                    //convertir K a ºC  (0 °C - 273,15)
+                    flTempOutput = flTempInput - 273.15f;
+                    stTempOutput = Float.toString(flTempOutput);
+                    jlCelsius.setText(stTempOutput + " ºC");
+                    //convertir K a ºF (0 K − 273,15) × 9 / 5 + 32
+                    flTempOutput = (flTempInput - 273.15f) * 9 / 5 + 32;
+                    stTempOutput = Float.toString(flTempOutput);
+                    jlFahrenheit.setText(stTempOutput + " ºF");
+                    //temperatura en K
+                    jlKelvin.setText(stTempInput + " K");
                     jlError.setText("");
                     break;
                 default:
@@ -54,17 +77,19 @@ public class TemperatureConverter extends javax.swing.JFrame {
         jlResults = new javax.swing.JLabel();
         jlCelsius = new javax.swing.JLabel();
         jlFahrenheit = new javax.swing.JLabel();
+        jlKelvin = new javax.swing.JLabel();
         jlError = new javax.swing.JLabel();
 
         //setear textos de los objetos
         jlTitle.setText("CONVERTIDOR DE TEMPERATURA");
         jlTitle.setFont(new java.awt.Font("Segoe UI", 1, 14));
         jtInput.setText("1");
-        jcbUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Selecciona unidad:", "Celsius [ºC]", "Fahrenheit [ºF]"}));
+        jcbUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Selecciona unidad:", "Celsius [ºC]", "Fahrenheit [ºF]", "Kelvin [K]"}));
         jlResults.setText("Valores:");
         jlResults.setFont(new java.awt.Font("Segoe UI", 1, 12));
         jlCelsius.setText(" ºC");
         jlFahrenheit.setText(" ºF");
+        jlKelvin.setText(" K");
         jlError.setText("");
         jlError.setForeground(Color.red);
 
@@ -86,6 +111,7 @@ public class TemperatureConverter extends javax.swing.JFrame {
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
+                                .addGap(100, 100, 100)
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jlTitle)
@@ -94,6 +120,7 @@ public class TemperatureConverter extends javax.swing.JFrame {
                                         .addComponent(jlResults)
                                         .addComponent(jlCelsius)
                                         .addComponent(jlFahrenheit)
+                                        .addComponent(jlKelvin)
                                         .addComponent(jlError))
                                 .addContainerGap(150, Short.MAX_VALUE))
         );
@@ -107,6 +134,7 @@ public class TemperatureConverter extends javax.swing.JFrame {
                                 .addComponent(jlResults)
                                 .addComponent(jlCelsius)
                                 .addComponent(jlFahrenheit)
+                                .addComponent(jlKelvin)
                                 .addComponent(jlError)
                                 .addContainerGap(150, Short.MAX_VALUE))
         );
@@ -124,12 +152,17 @@ public class TemperatureConverter extends javax.swing.JFrame {
             case "Selecciona unidad:":
                 jlCelsius.setText(" ºC");
                 jlFahrenheit.setText(" ºF");
+                jlKelvin.setText(" K");
+                jlError.setText("Selecciona una unidad de temperatura");
                 break;
             case "Celsius [ºC]":
                 temperature(jtInput.getText(), "C");
                 break;
             case "Fahrenheit [ºF]":
                 temperature(jtInput.getText(), "F");
+                break;
+            case "Kelvin [K]":
+                temperature(jtInput.getText(), "K");
                 break;
             default:
                 throw new AssertionError();
@@ -172,5 +205,6 @@ public class TemperatureConverter extends javax.swing.JFrame {
     private javax.swing.JLabel jlResults;
     private javax.swing.JLabel jlCelsius;
     private javax.swing.JLabel jlFahrenheit;
+    private javax.swing.JLabel jlKelvin;
     private javax.swing.JLabel jlError;
 }
